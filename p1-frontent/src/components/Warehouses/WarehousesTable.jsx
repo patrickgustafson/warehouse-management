@@ -1,7 +1,6 @@
 import { Table } from '@trussworks/react-uswds';
 
 export default function WarehousesTable({tableData}) {
-    console.log(tableData)
     return (
         <>
             <Table striped fullWidth className='bg-primary-lighter'>
