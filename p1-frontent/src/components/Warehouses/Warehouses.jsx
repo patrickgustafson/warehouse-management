@@ -1,7 +1,8 @@
-import { Button, Grid, GridContainer,  Modal,  ModalHeading,  ModalToggleButton } from '@trussworks/react-uswds';
+import { Grid, GridContainer,  Modal,  ModalHeading,  ModalToggleButton } from '@trussworks/react-uswds';
 import WarehousesTable from './WarehousesTable';
 import { useEffect, useState, useRef } from 'react';
-import WarehousesForm from './WarehousesForm';
+import CreateWarehousesForm from './CreateWarehousesForm';
+
 
 export default function Warehouses() {
 
@@ -47,7 +48,7 @@ export default function Warehouses() {
 
             <Modal id='warehouse-form-modal' ref={modalRef}>
                 <ModalHeading id='warehouse-form-modal-heading'>Enter New Warehouse Details</ModalHeading>
-                <WarehousesForm handleNewWarehouse={handleNewWarehouse}></WarehousesForm>
+                <CreateWarehousesForm handleNewWarehouse={handleNewWarehouse}></CreateWarehousesForm>
             </Modal>
         </>
     );

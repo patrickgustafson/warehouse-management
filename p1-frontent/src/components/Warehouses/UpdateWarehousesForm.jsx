@@ -1,6 +1,6 @@
 import { Button, Form, Label, TextInput } from "@trussworks/react-uswds";
 
-export default function WarehousesForm({handleNewWarehouse}) {
+export default function UpdateWarehousesForm({handleUpdatedWarehouse}) {
 
     const url = "http://localhost:8282/warehouses"
 
@@ -9,21 +9,24 @@ export default function WarehousesForm({handleNewWarehouse}) {
 
         const data = new FormData(event.target);
 
-        const newWarehouse = {
-            location : data.get('warehouseLocation'),
-            capacity : data.get('warehouseCapacity')
+        const url = url + "warehouse/" + warehouseId +
+        "?newName=" + encodeURIComponent(newName) +
+        "&newCapacity=" + encodeURIComponent(newCapacity);
+
+        const updatedWarehouse = {
+            warehouseId: warehouseId
         }
 
         fetch(url + "/warehouse", {
-            method : 'POST',
+            method : 'PUT',
             headers : {
                 'Content-Type' : 'application/json'
             },
-            body : JSON.stringify(newWarehouse)
+            body : JSON.stringify(updatedWarehouse)
         })
         .then(data => data.json())
         .then(returnedData => {
-            handleNewWarehouse(returnedData);
+            handleUpdatedWarehouse(returnedData);
             event.target.reset();
         }).catch(error => console.error(error))
     }
