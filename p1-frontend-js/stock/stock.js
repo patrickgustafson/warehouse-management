@@ -115,7 +115,28 @@ async function updateStock() {
         return;
     }
 
-    
+    const newItemId = document.getElementById('edit-stock-item-id').value;
+    const newWarehouseId = document.getElementById('edit-stock-warehouse-id').value;
+    const newQuantity = document.getElementById('edit-stock-quantity').value;
+
+    try {
+        const response = await fetch(`${URL}${newItemId}/${newWarehouseId}/${newQuantity}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            console.log('Stock updated successfully.');
+
+            await refreshTable();
+            clearForm("edit-stock");
+            hideModal("editStock");
+        }
+    } catch (error) {
+        console.error('Error updating Item:', error);
+    }
 }
 
 async function deleteStock() {
