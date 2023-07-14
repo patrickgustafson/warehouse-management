@@ -1,6 +1,7 @@
 const URL = "http://localhost:8282/warehouses/";
 let warehouses = [];
 
+// Refreshes table
 async function refreshTable() {
     let xhr = new XMLHttpRequest();
 
@@ -21,21 +22,25 @@ async function refreshTable() {
     xhr.send();
 }
 
+// Clears various forms on Warehouse page
 function clearForm(formId) {
     const form = document.getElementById(formId + "-form");
     form.reset();
 }
 
+// Dismisses various modals after submitting on Warehouse page
 function dismissModal(modalId) {
     const modalElement = document.getElementById(modalId + "Modal");
     const modal = bootstrap.Modal.getInstance(modalElement);
     modal.hide();
 }
 
+// Reloads table on Refresh
 document.addEventListener("DOMContentLoaded", () => {
     refreshTable();
 });
 
+// Populates Warehouse table on Warehouse page
 function addWarehouse(newWarehouse) {
     let tr = document.createElement("tr");
 
@@ -61,6 +66,7 @@ function addWarehouse(newWarehouse) {
     warehouses.push(newWarehouse);
 }
 
+// Creates Warehouse
 async function createWarehouse() {
     if (!validateForm("create-warehouse")) {
         return;
@@ -93,6 +99,7 @@ async function createWarehouse() {
     }
 }
 
+// Updates Warehouse
 async function updateWarehouse() {
     if (!validateForm("edit-warehouse")) {
         return;
@@ -130,6 +137,7 @@ async function updateWarehouse() {
     }
 }
 
+// Deletes Warehouse
 async function deleteWarehouse() {
     try {
         const warehouseId = document.getElementById("edit-warehouse-id").value;
@@ -157,6 +165,7 @@ async function deleteWarehouse() {
     }
 }
 
+// Opens Edit Modal on Warehouse page
 function openEditModal(warehouseId) {
     const warehouse = warehouses.find((w) => w.warehouseId === warehouseId);
 
@@ -168,6 +177,7 @@ function openEditModal(warehouseId) {
     editModal.show();
 }
 
+// Performs check on form input data for various forms on Warehouse page
 function validateForm(formId) {
     const location = document.getElementById(formId + "-location").value.trim();
     const capacity = document.getElementById(formId + "-capacity").value.trim();

@@ -1,6 +1,7 @@
 const URL = "http://localhost:8282/stock/";
 let stock = [];
 
+// Refreshes Stock table
 async function refreshTable() {
     let xhr = new XMLHttpRequest();
 
@@ -21,17 +22,20 @@ async function refreshTable() {
     xhr.send();
 }
 
+// Clears various forms on Stock page
 function clearForm(formId) {
     const form = document.getElementById(formId + "-form");
     form.reset();
 }
 
+// Hides various modals after submitting on Stock page
 function hideModal(modalId) {
     const modalElement = document.getElementById(modalId + "Modal");
     const modal = bootstrap.Modal.getInstance(modalElement);
     modal.hide();
 }
 
+// Loads table on refresh
 document.addEventListener("DOMContentLoaded", () => {
     let xhr = new XMLHttpRequest();
 
@@ -48,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     xhr.send();
 });
 
+// Populates Stock table on Stock page
 function addStock(newStock) {
     let tr = document.createElement("tr");
 
@@ -81,6 +86,7 @@ function addStock(newStock) {
     stock.push(newStock);
 };
 
+// Creates Stock
 async function createStock() {
     if (!validateForm("create-stock")) {
         return;
@@ -110,6 +116,7 @@ async function createStock() {
     }
 }
 
+// Updates Stock
 async function updateStock() {
     if (!validateForm("edit-stock")) {
         return;
@@ -139,6 +146,7 @@ async function updateStock() {
     }
 }
 
+// Deletes Stock
 async function deleteStock() {
     try {
         const itemId = document.getElementById('edit-stock-item-id').value;
@@ -162,6 +170,7 @@ async function deleteStock() {
     }
 }
 
+// Opens Edit Modal on Stock page
 function openEditModal(itemId, warehouseId) {
     const sto = stock.find((s) => s.id.itemId === itemId && s.id.warehouseId === warehouseId);
 
@@ -173,6 +182,7 @@ function openEditModal(itemId, warehouseId) {
     editItemModal.show();
 }
 
+// Valids form input for various forms on Stock page
 function validateForm(formId) {
     const itemId = document.getElementById(formId + "-item-id").value.trim();
     const warehouseId = document.getElementById(formId + "-warehouse-id").value.trim();

@@ -1,6 +1,7 @@
 const URL = "http://localhost:8282/items/";
 let items = [];
 
+// Refreshes Item Table
 async function refreshTable() {
     let xhr = new XMLHttpRequest();
 
@@ -21,21 +22,27 @@ async function refreshTable() {
     xhr.send();
 }
 
+
+// Clears various forms on Item page
 function clearForm(formId) {
     const form = document.getElementById(formId + "-form");
     form.reset();
 }
 
+// Hides various modals after Submitting on Item page
 function hideModal(modalId) {
     const modalElement = document.getElementById(modalId + "Modal");
     const modal = bootstrap.Modal.getInstance(modalElement);
     modal.hide();
 }
 
+// Loads Table on Refresh
 document.addEventListener("DOMContentLoaded", () => {
     refreshTable();
 });
 
+
+// Populates Item table
 function addItem(newItem) {
     let tr = document.createElement("tr");
 
@@ -61,6 +68,7 @@ function addItem(newItem) {
     items.push(newItem);
 };
 
+// Creates Item
 async function createItem() {
     if (!validateForm("create-item")) {
         return;
@@ -94,6 +102,7 @@ async function createItem() {
     }
 }
 
+// Updates Item
 async function updateItem() {
     if (!validateForm("edit-item")) {
         return;
@@ -132,6 +141,7 @@ async function updateItem() {
     }
 }
 
+// Deletes Item
 async function deleteItem() {
     try {
         const itemId = document.getElementById('edit-item-id').value;
@@ -160,6 +170,7 @@ async function deleteItem() {
     }
 }
 
+// Opens Edit Modal on Item Page
 function openEditModal(itemId) {
     const item = items.find((i) => i.itemId === itemId);
 
@@ -171,6 +182,7 @@ function openEditModal(itemId) {
     editItemModal.show();
 }
 
+// Performs a check on various form inputs on Item page
 function validateForm(formId) {
     const name = document.getElementById(formId + "-name").value.trim();
     const units = document.getElementById(formId + "-units").value.trim();
